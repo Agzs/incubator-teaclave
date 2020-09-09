@@ -10,7 +10,10 @@ RUN apt-get update && apt-get install -q -y \
     libprotobuf-dev \
     curl \
     pkg-config \
-    wget
+    wget \
+    vim \
+    tree \
+    apt-utils
 
 RUN echo 'deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu bionic main' | \
   tee /etc/apt/sources.list.d/intel-sgx.list

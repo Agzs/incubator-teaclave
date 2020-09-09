@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -q -y \
     autoconf \
     libtool \
     wget \
+    vim \
     python \
     python3 \
     libssl-dev \

@@ -15,6 +15,9 @@ class BuiltinEchoExample:
         self.user_password = user_password
 
     def echo(self, message="Hello, Teaclave!"):
+        print("AUTHENTICATION_SERVICE_ADDRESS = ", AUTHENTICATION_SERVICE_ADDRESS)
+        print("AS_ROOT_CA_CERT_PATH = ", AS_ROOT_CA_CERT_PATH)
+        print("ENCLAVE_INFO_PATH = ", ENCLAVE_INFO_PATH)
         client = AuthenticationService(
             AUTHENTICATION_SERVICE_ADDRESS, AS_ROOT_CA_CERT_PATH,
             ENCLAVE_INFO_PATH).connect().get_client()
@@ -54,6 +57,8 @@ class BuiltinEchoExample:
 
 
 def main():
+    print("user_id = ", USER_ID)
+    print("user_password = ", USER_PASSWORD)
     example = BuiltinEchoExample(USER_ID, USER_PASSWORD)
     if len(sys.argv) > 1:
         message = sys.argv[1]

@@ -141,6 +141,7 @@ class AuthenticationService:
         channel = self._context.wrap_socket(sock,
                                             server_hostname=self.address[0])
         cert = channel.getpeercert(binary_form=True)
+        print("print cert = ", cert, "\n")
         _verify_report(self.as_root_ca_cert_path, self.enclave_info_path, cert,
                        "authentication")
 
@@ -457,6 +458,7 @@ def _verify_report(as_root_ca_cert_path: str, enclave_info_path: str,
 
     cert = x509.load_der_x509_certificate(cert, default_backend())
     ext = json.loads(cert.extensions[0].value.value)
+    print("ext = ", ext)
 
     report = bytes(ext["report"])
     signature = bytes(ext["signature"])
