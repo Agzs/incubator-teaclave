@@ -23,6 +23,7 @@ extern crate sgx_tstd as std;
 use std::prelude::v1::*;
 
 mod echo;
+mod printf;
 mod face_detection;
 mod gbdt_predict;
 mod gbdt_train;
@@ -34,6 +35,7 @@ mod private_join_and_compute;
 mod rsa_sign;
 
 pub use echo::Echo;
+pub use printf::Printf;
 pub use face_detection::FaceDetection;
 pub use gbdt_predict::GbdtPredict;
 pub use gbdt_train::GbdtTrain;
@@ -52,6 +54,7 @@ pub mod tests {
     pub fn run_tests() -> bool {
         check_all_passed!(
             echo::tests::run_tests(),
+            printf::tests::run_tests(),
             gbdt_train::tests::run_tests(),
             gbdt_predict::tests::run_tests(),
             logistic_regression_train::tests::run_tests(),

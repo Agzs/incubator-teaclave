@@ -29,6 +29,7 @@ enclave_unit_test = [
 
 full_builtin_function = [
   "builtin_echo",
+  "builtin_printf",
   "builtin_gbdt_predict",
   "builtin_gbdt_train",
   "builtin_logistic_regression_predict",
@@ -41,6 +42,7 @@ full_builtin_function = [
 ]
 
 builtin_echo = []
+builtin_printf = []
 builtin_gbdt_predict = []
 builtin_gbdt_train = []
 builtin_logistic_regression_predict = []

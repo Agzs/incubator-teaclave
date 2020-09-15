@@ -158,7 +158,7 @@ class AuthenticationService:
         channel = self._context.wrap_socket(sock,
                                             server_hostname=self.address[0])
         cert = channel.getpeercert(binary_form=True)
-        print("print cert = ", cert, "\n")
+        # print("print cert = ", cert, "\n")
         _verify_report(self.as_root_ca_cert_path, self.enclave_info_path, cert,
                        "authentication")
 
@@ -370,8 +370,10 @@ class FrontendClient:
         request = RegisterFunctionRequest(self.metadata, name, description,
                                           executor_type, public, payload,
                                           arguments, inputs, outputs)
+        print("request = ", request)
         _write_message(self.channel, request)
         response = _read_message(self.channel)
+        print("response = ", response)
         return response["content"]["function_id"]
 
     def register_input_file(self, url: str, schema: str, key: List[int],
@@ -400,8 +402,10 @@ class FrontendClient:
         request = CreateTaskRequest(self.metadata, function_id,
                                     function_arguments, executor,
                                     inputs_ownership, outputs_ownership)
+        print("request = ", request)
         _write_message(self.channel, request)
         response = _read_message(self.channel)
+        print("response = ", response)
         return response["content"]["task_id"]
 
     def assign_data_to_task(self, task_id: str, inputs: List[DataMap],
@@ -419,16 +423,20 @@ class FrontendClient:
 
     def invoke_task(self, task_id: str):
         request = InvokeTaskRequest(self.metadata, task_id)
+        print("request = ", request)
         _write_message(self.channel, request)
         response = _read_message(self.channel)
+        print("response = ", response)
         assert (response["result"] == "ok")
 
     def get_task_result(self, task_id: str):
         request = GetTaskRequest(self.metadata, task_id)
+        print("request = ", request)
 
         while True:
             _write_message(self.channel, request)
             response = _read_message(self.channel)
+            print("response = ", response)
             time.sleep(1)
             if response["content"]["status"] == 10:
                 break
@@ -475,7 +483,7 @@ def _verify_report(as_root_ca_cert_path: str, enclave_info_path: str,
 
     cert = x509.load_der_x509_certificate(cert, default_backend())
     ext = json.loads(cert.extensions[0].value.value)
-    print("ext = ", ext)
+    # print("ext = ", ext)
 
     report = bytes(ext["report"])
     signature = bytes(ext["signature"])

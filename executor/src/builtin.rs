@@ -19,7 +19,7 @@
 use std::prelude::v1::*;
 
 use teaclave_function::{
-    Echo, FaceDetection, GbdtPredict, GbdtTrain, LogisticRegressionPredict,
+    Echo, Printf, FaceDetection, GbdtPredict, GbdtTrain, LogisticRegressionPredict,
     LogisticRegressionTrain, OnlineDecrypt, OrderedSetIntersect, PrivateJoinAndCompute, RsaSign,
 };
 use teaclave_types::{FunctionArguments, FunctionRuntime, TeaclaveExecutor};
@@ -40,6 +40,8 @@ impl TeaclaveExecutor for BuiltinFunctionExecutor {
         match name.as_str() {
             #[cfg(feature = "builtin_echo")]
             Echo::NAME => Echo::new().run(arguments, runtime),
+            #[cfg(feature = "builtin_printf")]
+            Printf::NAME => Printf::new().run(arguments, runtime),
             #[cfg(feature = "builtin_gbdt_predict")]
             GbdtPredict::NAME => GbdtPredict::new().run(arguments, runtime),
             #[cfg(feature = "builtin_gbdt_train")]
