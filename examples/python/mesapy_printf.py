@@ -31,7 +31,7 @@ class MesaPyPrintfExample:
         self.user_id = user_id
         self.user_password = user_password
 
-    def echo(self,
+    def printf(self,
              payload_file="mesapy_printf_payload.py",
              message="Hello, Teaclave.Printf!"):
         client = AuthenticationService(
@@ -56,7 +56,7 @@ class MesaPyPrintfExample:
             payload = f.read()
         function_id = client.register_function(
             name="mesapy-printf",
-            description="An echo function implemented in Python",
+            description="An printf function implemented in Python",
             executor_type="python",
             payload=list(payload),
             arguments=["message"])
@@ -80,13 +80,13 @@ def main():
     example = MesaPyPrintfExample(USER_ID, USER_PASSWORD)
     if len(sys.argv) == 2:
         message = sys.argv[1]
-        rt = example.echo(message=message)
+        rt = example.printf(message=message)
     elif len(sys.argv) == 3:
         payload = sys.argv[1]
         message = sys.argv[2]
-        rt = example.echo(payload, message)
+        rt = example.printf(payload, message)
     else:
-        rt = example.echo()
+        rt = example.printf()
 
     print("[+] function return: ", rt)
 
