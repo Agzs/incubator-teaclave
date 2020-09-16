@@ -433,10 +433,12 @@ class FrontendClient:
         request = GetTaskRequest(self.metadata, task_id)
         print("request = ", request)
 
+        count = 1
         while True:
             _write_message(self.channel, request)
             response = _read_message(self.channel)
-            print("response = ", response)
+            print(count, "{} response = ",response)
+            count += 1
             time.sleep(1)
             if response["content"]["status"] == 10:
                 break
